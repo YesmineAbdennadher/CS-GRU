@@ -151,7 +151,7 @@ class GRUlayer(nn.Module):
             outputs[:, t, ...] = output_prev
             temps[:, t, ...] = temp
 
-        return temps
+        return outputs
 
     def clamp(self):
         with torch.no_grad():
