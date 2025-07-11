@@ -148,14 +148,14 @@ def train(args, epoch, train_data,  model, criterion, optimizer):
             inputs = inputs.reshape(inputs.size(0), inputs.size(1), 1, 8, 8) 
         elif args.dataset == 'shd':
             inputs = inputs.reshape(inputs.size(0), inputs.size(1), 7, 10, 10)
-
+        optimizer.zero_grad()
         outputs = model(inputs)
         max_logits_over_time = outputs.max(dim=1)[0]
         if args.dataset == 'shd' :
             loss = criterion(max_logits_over_time, targets.squeeze(1))
         else:
             loss = criterion(max_logits_over_time, targets)
-
+       
         loss.backward()
         optimizer.step()
 
